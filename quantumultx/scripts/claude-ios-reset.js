@@ -17,12 +17,17 @@ const headers = {
   "Cache-Control": "no-store"
 };
 
-// A response from claude.ai may expire a .claude.ai cookie. A response from
-// a-api.anthropic.com may not legally clear a cookie belonging to claude.ai.
+// Only claude.ai can expire cookies scoped to .claude.ai.
+// Keep both cookies separate: Set-Cookie is a repeatable response header.
 if (/^https:\/\/claude\.ai\/api\/account(?:[\/?#]|$)/i.test($request.url)) {
-  headers["Set-Cookie"] =
-    "sessionKey=; Path=/; Domain=.claude.ai; Max-Age=0; " +
+  const expires =
+    "Path=/; Domain=.claude.ai; Max-Age=0; " +
     "Expires=Thu, 01 Jan 1970 00:00:00 GMT; Secure; HttpOnly; SameSite=Lax";
+
+  headers["Set-Cookie"] = [
+    `sessionKey=; ${expires}`,
+    `routingHint=; ${expires}`
+  ];
 }
 
 try {

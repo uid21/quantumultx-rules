@@ -15,3 +15,43 @@ host-suffix, nexusedgeio.com, reject
 host-suffix, szbdyd.com, reject
 host-wildcard, *302*.bilivideo.com, reject
 host-wildcard, *pcdn*.biliapi.net, reject
+
+HOST-SUFFIX,solseedr.cn
+HOST-SUFFIX,solseed.cn
+HOST-SUFFIX,ppio.bilivideo.com
+HOST-SUFFIX,kodo.bilivideo.com
+HOST-SUFFIX,abcdefgaijkl.com
+HOST-SUFFIX,wiebaijitamo.com
+HOST-SUFFIX,abcdegghijkl.com
+HOST-SUFFIX,opqrsduvwxyz.com
+HOST-SUFFIX,zyxwvutsrqpo.com
+HOST-SUFFIX,clipspacexyy.com
+HOST-SUFFIX,netvisorhub.com
+HOST-SUFFIX,lmnopqrstuvw.com
+HOST-SUFFIX,quantazoomz.com
+HOST-SUFFIX,stormfluxixx.com
+HOST-SUFFIX,datapixelzzx.com
+HOST-SUFFIX,ijklmnopqrst.com
+HOST-SUFFIX,flexcloudyz.com
+HOST-SUFFIX,dooquuequezi.com
+HOST-SUFFIX,taishoopecei.com
+HOST-SUFFIX,qrstuvwxyzab.com
+HOST-SUFFIX,zeicaefiegoh.com
+HOST-SUFFIX,zonerushappz.com
+HOST-SUFFIX,techvortexz1.com
+HOST-SUFFIX,alphawebzzz.com
+HOST-SUFFIX,gliderboxxyy.com
+HOST-SUFFIX,xionguamaqui.com
+HOST-SUFFIX,gaetausohyei.com
+HOST-SUFFIX,roongeimahwo.com
+HOST-SUFFIX,kaiwaijaicai.com
+HOST-SUFFIX,ourdvsss.com
+
+#臻选云（7 条）
+HOST-SUFFIX,zhenxyun.cn
+HOST-SUFFIX,zhenxcloud.cn
+HOST-SUFFIX,zhenidc.cn
+HOST-SUFFIX,zxycdn.cn
+HOST-SUFFIX,zhenxuanidc.cn
+HOST-SUFFIX,zhenxuancdn.cn
+HOST-SUFFIX,zhenxuancloud.com

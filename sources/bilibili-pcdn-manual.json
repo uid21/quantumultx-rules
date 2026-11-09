@@ -1,0 +1,6 @@
+{
+  "basic": [
+    ["host-wildcard", "*pcdn*.biliapi.net"]
+  ],
+  "extended": []
+}

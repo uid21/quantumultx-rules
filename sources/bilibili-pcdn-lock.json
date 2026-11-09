@@ -1,0 +1,18 @@
+{
+  "sources": [
+    {
+      "id": "mbga",
+      "url": "https://raw.githubusercontent.com/SukkaW/Make-Bilibili-Great-Than-Ever-Before/master/src/core/player/cdn-classify.ts",
+      "sha256": "84d7861ab9136aa72fb079b2a40dccc94655ff5c2d609aba6054fc26dd145995"
+    },
+    {
+      "id": "pcdn",
+      "url": "https://raw.githubusercontent.com/uselibrary/PCDN/main/pcdn.list",
+      "sha256": "40070869224f1851b8ccdb8fd2384ba49e62ee022a76aacf4fb8d02a775a6d3e"
+    }
+  ],
+  "rules": {
+    "basic": 5,
+    "extended": 11
+  }
+}

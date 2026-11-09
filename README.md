@@ -32,7 +32,7 @@ MBGA 的网页脚本还会读播放接口的全部候选地址、按签名类型
 
 GitHub Actions 每天 UTC 18:23（北京时间次日 02:23）读取上游；也可在 Actions → **Update Bilibili PCDN rules** → **Run workflow** 手动执行。QX 每 24 小时拉取一次已生成文件。
 
-下载、结构、域名范围或正常 CDN 保护检查失败时，工作流报错并保留已发布文件。输出排序去重，无变化不提交。仓库的手工补充写在 [`sources/bilibili-pcdn-manual.json`](sources/bilibili-pcdn-manual.json)，不会被自动更新覆盖；生成文件不直接手改。
+下载、结构、域名范围或正常 CDN 保护检查失败时，工作流报错并保留已发布文件。输出排序去重，日常无规则变化不提交。仓库的手工补充写在 [`sources/bilibili-pcdn-manual.json`](sources/bilibili-pcdn-manual.json)，不会被自动更新覆盖；生成文件不直接手改。
 
 本地更新和测试只需 Python 3.10+，没有额外依赖：
 
@@ -41,7 +41,9 @@ python -m unittest discover -s tests -v
 python scripts/update_bilibili_pcdn.py
 ```
 
-如上游改成不兼容结构，需修改解析器后重新运行。[GitHub 会在公开仓库 60 天无活动时停用定时工作流](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)，遇到时从 Actions 重新启用。
+如上游改成不兼容结构，需修改解析器后重新运行。[GitHub 会在公开仓库 60 天无活动时停用定时工作流](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)。为此，工作流在规则无变化且距最近一次提交或保活已满 45 天时，才将当前 UTC 日期写入 `.github/bilibili-updater-heartbeat.txt` 并提交一次；近期已有更新时不会另加保活提交。保活文件不触发该工作流，不增加第三方 Action 或权限。
+
+上游下载失败时仍可按需保活，但失败的规则更新不会提交，工作流仍显示失败。保活依赖定时工作流仍能执行；手动停用、仓库 Actions 被禁用或平台已停用的工作流无法自行启动，需要从 Actions 重新启用。
 
 ## Sources
 

@@ -47,16 +47,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python scripts/update_bilibili_pcdn.py
-      - name: Commit changed rules only
+      - name: Refresh upstream rules
+        id: refresh
+        run: python scripts/update_bilibili_pcdn.py
+      - name: Commit changed rules or an idle heartbeat
+        if: ${{ !cancelled() }}
         shell: bash
         run: |
-          git add quantumultx/filter/bilibili-pcdn.list quantumultx/filter/bilibili-pcdn-extended.list sources/bilibili-pcdn-lock.json
+          if [ '${{ steps.refresh.outcome }}' = 'success' ]; then
+            git add quantumultx/filter/bilibili-pcdn.list quantumultx/filter/bilibili-pcdn-extended.list sources/bilibili-pcdn-lock.json
+          fi
+          message='chore: update Bilibili PCDN rules'
           if git diff --cached --quiet; then
-            echo 'No upstream changes.'
+            python scripts/heartbeat_bilibili_updater.py
+            if [ -f .github/bilibili-updater-heartbeat.txt ]; then
+              git add .github/bilibili-updater-heartbeat.txt
+            fi
+            message='chore: keep Bilibili rule updater active after 45 idle days'
+          fi
+          if git diff --cached --quiet; then
+            echo 'No upstream changes or idle heartbeat due.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'chore: update Bilibili PCDN rules'
+          git commit -m "$message"
           git push origin HEAD:main

@@ -1,5 +1,7 @@
 # Quantumult X rules
 
+##一些 Vibe & 聚合 来的自用规则&重写
+
 ## B 站 PCDN
 
 先添加基础版远程分流。在 Quantumult X 的「分流 → 资源」中填入下面地址，策略选 `reject`，资源解析器关闭，每天更新：
@@ -28,7 +30,7 @@ https://raw.githubusercontent.com/uid21/quantumultx-rules/main/quantumultx/filte
 
 MBGA 的网页脚本还会读播放接口的全部候选地址、按签名类型选源，实验分支还包含并发分块下载；这些能力无法等价地装进域名拦截列表。
 
-## 自动更新
+### 自动更新
 
 GitHub Actions 每天 UTC 18:23（北京时间次日 02:23）读取上游；也可在 Actions → **Update Bilibili PCDN rules** → **Run workflow** 手动执行。QX 每 24 小时拉取一次已生成文件。
 
@@ -45,7 +47,7 @@ python scripts/update_bilibili_pcdn.py
 
 上游下载失败时仍可按需保活，但失败的规则更新不会提交，工作流仍显示失败。保活依赖定时工作流仍能执行；手动停用、仓库 Actions 被禁用或平台已停用的工作流无法自行启动，需要从 Actions 重新启用。
 
-## Sources
+### Sources
 
 - [SukkaW / Make Bilibili Great Than Ever Before](https://github.com/SukkaW/Make-Bilibili-Great-Than-Ever-Before/blob/master/src/core/player/cdn-classify.ts)：读取 PCDN 分类数据，保留 [MIT 许可证](licenses/MBGA-MIT.txt)。不执行下载到的 TypeScript，也不复制播放器实现。
 - [uselibrary / PCDN](https://github.com/uselibrary/PCDN/blob/main/pcdn.list)：只导入 B 站有关的已审核域名和 PCDN 模式；不导入其他平台、整份去广告规则或全局关键词。保留 [GPLv3 许可证](licenses/PCDN-GPL-3.0.txt)。生成列表中的派生数据按 GPLv3 分发。
@@ -53,6 +55,6 @@ python scripts/update_bilibili_pcdn.py
 
 各来源 URL、抓取内容 SHA-256 及规则数量保存在 [`sources/bilibili-pcdn-lock.json`](sources/bilibili-pcdn-lock.json)，只有内容变化时才更新。
 
-## 其他资源
+## Claude登录状态刷新
 
-原有的 `quantumultx/claude-ios-reset.conf` 为临时登录状态清理资源，按文件内说明使用。
+ `quantumultx/claude-ios-reset.conf` 为临时登录状态清理资源，按文件内说明使用。

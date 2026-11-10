@@ -1,6 +1,6 @@
 # Quantumult X rules
 
-##一些 Vibe & 聚合 来的自用规则&重写
+## 一些 Vibe & 聚合 来的自用规则&重写
 
 ## B 站 PCDN
 
